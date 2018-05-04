@@ -1,0 +1,32 @@
+
+int do_isp_rawdata(int framecount, char *filename)
+{
+    FILE* rawfile;
+    unsigned char* rawbuff;
+    ISP_VI_ATTR_S vi_attr;
+    int raw_size;
+
+    rawfile = fopen(filename, "wb");
+    if (NULL == rawfile) {
+            printf("[ERROR]: cannot create file - %s\n", filename);
+            return -1;
+    }
+    API_ISP_GetViAttr(&vi_attr);
+    raw_size = vi_attr.u16PicWidth*vi_attr.u16PicHeight;
+    rt_kprintf("w:%d,h:%d\n",vi_attr.u16PicWidth,  vi_attr.u16PicHeight);
+    rawbuff = (unsigned char*)malloc(raw_size * framecount);
+    if (NULL == rawbuff)
+    {
+        printf("[ERROR]: not enough memory for dump raw data \n");
+        return -1;
+
+    }
+    API_ISP_GetRaw(1, rawbuff, raw_size * framecount, framecount );
+    fwrite(rawbuff, 1, raw_size * framecount, rawfile);
+    free(rawbuff);
+    fclose(rawfile);    
+    return 0;
+
+}
+
+FINSH_FUNCTION_EXPORT(do_isp_rawdata, do_isp_rawdata(frame_num, filename));
