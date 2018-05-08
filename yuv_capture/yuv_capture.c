@@ -71,7 +71,7 @@ void change_8X8_to_16X16(FH_UINT8 *src, FH_UINT8 *dst)
 void yuv_transform(FH_UINT8 *src_y, FH_UINT8 *src_c, FH_UINT8 *dst, FH_UINT32 w, FH_UINT32 h)
 {
     FH_SINT32 w_align, h_align;
-    FH_SINT32 w_align32, h_align32;
+
     FH_SINT32 i, j, numblock;
     FH_UINT8 orderbuf[8*8*4];
     FH_UINT8 *ybuf, *cbuf, *yuvbuf;
@@ -79,8 +79,8 @@ void yuv_transform(FH_UINT8 *src_y, FH_UINT8 *src_c, FH_UINT8 *dst, FH_UINT32 w,
 
     w_align = (w + 15)&(~15);
     h_align = (h + 15)&(~15);
-    w_align32 = (w + 31)&(~31);
-    h_align32 = (h + 31)&(~31);
+
+    //printf("h %d,h_align %d\n", h, h_align);
 
     ybuf = src_y;
     cbuf = src_c;
@@ -122,7 +122,17 @@ void capture_yuv(void)
     FH_UINT8 *dst;
     FH_SINT32 ret;
     FH_SINT32 chan = CHANNEL_COUNT - 1;
-    dst = malloc(g_channel_infos[chan].width * g_channel_infos[chan].height * 3 / 2);
+    chan = 0;
+    FH_UINT8 *yuv_org;
+    int w, h;
+    w = g_channel_infos[chan].width;
+    h = g_channel_infos[chan].height;
+
+    int h_align = (h + 15)&(~15);
+
+    dst = malloc( w * h_align * 3 / 2);
+    printf("capture ch %d,resolution [%d*%d] yuv\n", chan, w , h);
+
     if (dst == NULL)
     {
         printf("Error: failed to allocate yuv transform buffer\n");
@@ -132,16 +142,27 @@ void capture_yuv(void)
     ret = FH_VPSS_GetChnFrame(chan, &yuv_data);
     if (ret == RETURN_OK)
     {
-        yuv_transform(yuv_data.yluma.vbase, yuv_data.chroma.vbase, dst, g_channel_infos[chan].width, g_channel_infos[chan].height);
+        yuv_org = malloc(w * h_align * 3 / 2);
+        if(yuv_org == NULL){
+            printf("Error: failed to allocate yuv buffer\n");
+            return;
+        }
+        memcpy(yuv_org, yuv_data.yluma.vbase, w * h );
+        memcpy(yuv_org+w * h_align ,  yuv_data.chroma.vbase,  w * h/2);
+
+        yuv_transform(yuv_org, yuv_org+w * h_align, dst, w, h);
+
         yuv_file = fopen("chn.yuv", "wb");
-        fwrite(dst, 1, g_channel_infos[chan].width * g_channel_infos[chan].height * 3 / 2, yuv_file);
+        fwrite(dst, 1, w * h * 3 / 2, yuv_file);
         fclose(yuv_file);
+        free(yuv_org);
         printf("GET CHN %d YUV DATA w:%d h:%d to file chn.yuv\n\n", chan, g_channel_infos[chan].width , g_channel_infos[chan].height);
     }
     else
     {
         printf("Error: FH_VPSS_GetChnFrame failed with %d\n\n", ret);
     }
+    free(dst);
 }
 #endif
 
