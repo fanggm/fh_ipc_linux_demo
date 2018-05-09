@@ -28,7 +28,7 @@ struct channel_info {
 static struct channel_info g_three_channels[] = {
 	{
 		.width = CH0_WIDTH,
-		.height = CH0_HEIGHT+8,
+		.height = CH0_HEIGHT+8,    //1920 * 1088 divide 16*16
 		.framerate = ((CH0_FRAME_TIME<<16) | (CH0_FRAME_COUNT)),
 		.bps = CH0_BIT_RATE
 	},
