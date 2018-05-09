@@ -1,6 +1,6 @@
 include ../Rules.make
 
-LIBS = $(SDK_LIBS) -lpthread -lvlcview -lmipi
+LIBS = $(SDK_LIBS) -lpthread
 
 ifeq ($(DEBUG),0)
   CFLAGS 	+= -O2
@@ -8,9 +8,9 @@ else
   CFLAGS 	+= -O0 -g3
 endif
 
-BIN = sample_vlcview
+BIN = sample_venc
 
-SRCS = $(wildcard *.c) $(wildcard ../common/*.c) $(wildcard ../common/dbi/*.c)
+SRCS = $(wildcard *.c) $(wildcard ../common/*.c)
 OBJS	= $(SRCS:%.c=%.o)
 DEPENDS	= $(subst .o,.d,$(OBJS))
 

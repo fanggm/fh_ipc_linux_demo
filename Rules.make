@@ -24,7 +24,7 @@ SDK_LIBS = -ldbi -ldci -ldsp -lisp -lispcore -ladvapi -lvmm
 
 INSTALL_DIR ?= $(SAMPLE_TOP_DIR)/bin
 
-SENSOR ?= jxf22_mipi
+SENSOR ?= imx291
 
 ifeq ($(SENSOR),imx138)
 SENSOR_LIB = -limx-138
