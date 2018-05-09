@@ -13,7 +13,8 @@
 FH8x30_IPC_Vx.x_xxxxxxxx 目录结构如下：
     |-- common                  	# 
     |-- app
-    	|-- mjpeg_substream         	# 媒体开发参考手册、开发环境设置
+    	|-- mjpeg_substream         	# 支持主码流和子码流mjpeg
     	|-- raw_dump			# 获取raw数据
-    	|-- fh8830_yuv_capture 	        # 获取1帧主码流yuv数据          
-    
+    	|-- fh8830_yuv_capture 	        # 获取1帧yuv数据，可以选择0、1、2 任意一个通道的数据          
+        |-- nr3d_enable			# 从软硬件同时关闭NR3D模块，仅关闭软件或硬件模块不能完全关闭。
+					  类似的关闭IPF其他模块参照修改。
