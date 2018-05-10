@@ -1,6 +1,6 @@
 include ../Rules.make
 
-LIBS = $(SDK_LIBS) -lpthread -lvlcview -lrt -lmipi
+LIBS = $(SDK_LIBS) -lpthread -lvlcview
 
 ifeq ($(DEBUG),0)
   CFLAGS 	+= -O2
