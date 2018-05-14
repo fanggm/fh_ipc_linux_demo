@@ -1,0 +1,5 @@
+2018/5/11   (majg)
+____________________________________
+1、sample_4.ini 是打包四个文件，可支持xmodem.img烧写，Flash.img烧写
+
+2、sample_5.ini 是打包五个文件，可支持Flash.img烧写
