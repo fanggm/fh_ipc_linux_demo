@@ -14,8 +14,9 @@ FH8x30_IPC_Vx.x_xxxxxxxx 目录结构如下：
     |-- common                  	# 
     |-- app
     	|-- mjpeg_substream         	# 支持子码流mjpeg，修改通道可以获取主码流mjpeg
-    	|-- raw_dump			# 获取raw数据
+    	|-- raw_dump			        # 获取raw数据
     	|-- fh8830_yuv_capture 	        # 获取1帧yuv数据，可以选择0、1、2 任意一个通道的数据          
-        |-- nr3d_enable			# 从软硬件同时关闭NR3D模块，仅关闭软件或硬件模块不能完全关闭。
-					  类似的关闭IPF其他模块参照修改。
-	|-- rotate			# 对主码流设置90/180/270/360度旋转
+        |-- nr3d_enable			        # 从软硬件同时关闭NR3D模块，仅关闭软件或硬件模块不能完全关闭。
+				            	          类似的关闭IPF其他模块参照修改。
+	    |-- rotate			            # 对主码流设置90/180/270/360度旋转
+        |-- jffs2_make                  # jffs2 make
