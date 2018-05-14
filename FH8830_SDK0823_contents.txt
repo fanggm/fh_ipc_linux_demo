@@ -20,3 +20,4 @@ FH8x30_IPC_Vx.x_xxxxxxxx 目录结构如下：
 				            	          类似的关闭IPF其他模块参照修改。
 	    |-- rotate			            # 对主码流设置90/180/270/360度旋转
         |-- jffs2_make                  # jffs2 make
+	|-- flash_make 			# flash make
