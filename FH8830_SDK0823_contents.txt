@@ -21,3 +21,5 @@ FH8x30_IPC_Vx.x_xxxxxxxx 目录结构如下：
 	    |-- rotate			            # 对主码流设置90/180/270/360度旋转
         |-- jffs2_make                  # jffs2 make
 	|-- flash_make 			# flash make
+	|-- change_solution		# change solution
+					一定要先创建分辨率大的，后面才可以切成分辨率小的幅面。 	
