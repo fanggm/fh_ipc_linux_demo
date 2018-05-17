@@ -23,3 +23,4 @@ FH8x30_IPC_Vx.x_xxxxxxxx 目录结构如下：
 	|-- flash_make 			# flash make
 	|-- change_solution		# change solution
 					一定要先创建分辨率大的，后面才可以切成分辨率小的幅面。 	
+	|-- smart_enable		# smart_enable 基于smart_enc demo开关功能
