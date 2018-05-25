@@ -18,10 +18,11 @@ FH8x30_IPC_Vx.x_xxxxxxxx 目录结构如下：
     	|-- fh8830_yuv_capture 	        # 获取1帧yuv数据，可以选择0、1、2 任意一个通道的数据          
         |-- nr3d_enable			        # 从软硬件同时关闭NR3D模块，仅关闭软件或硬件模块不能完全关闭。
 				            	          类似的关闭IPF其他模块参照修改。
-	    |-- rotate			            # 对主码流设置90/180/270/360度旋转
+	    |-- rotate			            # 对主码流设置90/180/270/360度旋转（若使用vlc无法实时看到旋转效果，更新vlc版本）
         |-- jffs2_make                  # jffs2 make
 	|-- flash_make 			# flash make
 	|-- change_solution		# change solution
 					一定要先创建分辨率大的，后面才可以切成分辨率小的幅面。 	
 	|-- smart_enable		# smart_enable 基于smart_enc demo开关功能
 	|-- change_fps			# change fps
+	|-- video_osd_rotate		# OSD和图像一起旋转
